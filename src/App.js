@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import VisualKeyboard from "./components/VisualKeyboard";
+import SpeechSynthesis from "./components/SpeechSynthesis";
 
 
 function App() {
@@ -15,8 +16,7 @@ function App() {
     setInputValue(newValue);
 
     const inputWords = newValue.trim().toLowerCase().split(" ");
-    const displayedWords = generatedText
-      .split(" ")
+    const displayedWords = generatedText.split(" ")
       .slice(currentWordIndex, currentWordIndex + wordsToShow)
       .map((word) => word.trim().toLowerCase());
 
@@ -85,14 +85,15 @@ function App() {
 
   const getColoredText = () => {
     const inputWords = inputValue.trim().toLowerCase().split(" ");
-    const generatedWords = generatedText
-      .split(" ")
-      .slice(currentWordIndex, currentWordIndex + wordsToShow);
+    const generatedWords = generatedText.split(" ").slice(currentWordIndex, currentWordIndex + wordsToShow);
+  
 
     return generatedWords.map((word, index) => {
       let color = "black"; // default color for words not yet typed
       if (index < inputWords.length) {
         color = inputWords[index] === word.trim().toLowerCase() ? "blue" : "red";
+        
+      
       }
       return (
         <span key={index} style={{ color: color }}>
@@ -101,6 +102,16 @@ function App() {
       );
     });
   };
+
+  const findRedIndex = () => {
+    console.log("Generatedcolor ", getColoredText());
+    //const redIndex = getColoredText().findIndex((word) => word.props.style.color === "red");
+    return 0 ;
+  }
+  console.log(findRedIndex());
+  let redIndex = findRedIndex();
+ 
+
 
   return (
     <div className="container"   style={{ padding
@@ -118,6 +129,10 @@ function App() {
         }}
       />
       <VisualKeyboard activeKeys={activeKeys} />
+      
+      <SpeechSynthesis text="Hellp wprd" />
+      <p className="text" style={ {fontSize:"26px"}}>{getColoredText()[currentWordIndex]}</p>
+     
     </div>
   );
 }
