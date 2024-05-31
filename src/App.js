@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import VisualKeyboard from "./components/VisualKeyboard";
 import SpeechSynthesis from "./components/SpeechSynthesis";
+import "./App.css";
 
 
 function App() {
@@ -103,21 +104,19 @@ function App() {
     });
   };
 
-  const findRedIndex = () => {
-    console.log("Generatedcolor ", getColoredText());
-    //const redIndex = getColoredText().findIndex((word) => word.props.style.color === "red");
-    return 0 ;
-  }
-  console.log(findRedIndex());
-  let redIndex = findRedIndex();
+ 
+
  
 
 
   return (
     <div className="container"   style={{ padding
       :"50px"}}>
-      <h1 className="header">React Basics</h1>
-      <p className="text" style={ {fontSize:"26px"}}>{getColoredText()}</p>
+
+      
+
+      <SpeechSynthesis text={getColoredText()} />
+      <p className="text">{getColoredText()}</p>
       <textarea
         value={inputValue}
         onChange={inputHandler}
@@ -128,10 +127,12 @@ function App() {
         style={ {fontSize:"26px"
         }}
       />
-      <VisualKeyboard activeKeys={activeKeys} />
+      <div className ="visul_keyboard">
+      <VisualKeyboard activeKeys={activeKeys}  />
+      </div>
       
-      <SpeechSynthesis text="Hellp wprd" />
-      <p className="text" style={ {fontSize:"26px"}}>{getColoredText()[currentWordIndex]}</p>
+     
+     
      
     </div>
   );
